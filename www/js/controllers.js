@@ -2,13 +2,15 @@ angular.module('starter.controllers', [])
 
 .controller('NutriCtrl', function($scope) {
   $scope.cameraCapture = function() {
-    alert("camera called");
-    alert(navigator);
     navigator.camera.getPicture(function(result) {
         console.log(result);
+        $scope.imageUri = result;
       }, function(err) {
         console.log(err);
-      }, options);
+      }, { 
+        quality: 50,
+        destinationType: Camera.DestinationType.DATA_URL
+      });
   };
 })
 
