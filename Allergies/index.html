@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+	<link href='http://fonts.googleapis.com/css?family=Josefin+Sans:700,700italic|Josefin+Slab:700,700italic' rel='stylesheet' type='text/css'>
+</head>
+<body>
+	<div>
+		Type in your allergies: <br> 		 
+		milk, egg, fish, shellfish, peanut, wheat, soybeans, none <br>
+		<form name = "formData">
+			<span id="buttons">
+				<input type ="button" name="button1" value="Doritos Tortilla Chips" class = "col-xs-4">
+				<input type ="button" name="button2" value="Brussels Cookies" class = "col-xs-4">
+				<input type ="button" name="button3" value="Skippy Peanut Butter" class = "col-xs-4">
+			</span>
+		</form>
+		<br>
+		<form id="form" onsubmit="return false;">
+	    	<input type="text" id="userInput" />
+	    	<input type="submit" onclick="inputAllergies();" />
+		</form>
+		<div class="col-xs-6">
+			<div class="caneat" id="edible">Edible</div>
+		</div>
+		<div class="col-xs-6">
+			<div class="nutrient" id="milk">Milk</div>
+		</div>
+		<div class="col-xs-6">
+			<div class="nutrient" id="egg">Egg</div>
+		</div>
+		<div class="col-xs-6">
+			<div class="nutrient" id="fish">Fish</div>
+		</div>
+		<div class="col-xs-6">
+			<div class="nutrient" id="shellfish">Shellfish</div>
+		</div>
+		<div class="col-xs-6">
+			<div class="nutrient" id="peanut">Peanut</div>
+		</div>
+		<div class="col-xs-6">
+			<div class="nutrient" id="wheat">Wheat</div>
+		</div>
+		<div class="col-xs-6">
+			<div class="nutrient" id="soybeans">Soybeans</div>
+		</div>
+		<a href="progress.html">Secret button</a>
+	</div>
+</body>
+</html>
+
+<style>
+* {
+	padding: 0;
+	margin: 0;
+	margin-top: 20px;
+	text-align: center;
+	font-family: Josefin Sans;
+	font-size: 1.5em;
+	background-color: cyan;
+}
+
+.nutrient {
+	width: 200px;
+	height: 200px;
+	line-height: 195px;
+	display: inline-block;
+	text-align: center;
+	
+	border-radius: 100%;
+	background-color: green;
+
+	border: 10px solid grey;
+}
+
+.caneat {
+	width: 200px;
+	height: 200px;
+	line-height: 195px;
+	display: inline-block;
+	text-align: center;
+	
+	border-radius: 5%;
+	background-color: green;
+
+	border: 10px solid grey;
+}
+</style>
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+	var text1 = "Whole Corn, Vegetable Oil (Sunflower, Canola, Corn, and/or Soybean Oil), Maltodextrin (Made from Corn), and Less than 2% of the Following: Wheat Flour, Salt, Cheddar Cheese (Milk, Cheese Cultures, Salt, Enzymes), Whey, Monosodium Glutamate, Buttermilk, Romano Cheese (Part-Skim Cow's Milk, Cheese Cultures, Salt, Enzymes), Whey Protein Concentrate, Onion Powder, Partially Hydrogenated Soybean and Cottonseed Oil, Corn Flour, Natural and Artificial Flavor, Dextrose, Tomato Powder, Lactose, Spices, Artificial Color (Including Yellow 6, Yellow 5, Red 40), Lactic Acid, Citric Acid, Sugar, Garlic Powder, Skim Milk, Whey Protein Isolate, Corn Syrup Solids, Red and Green Bell Pepper Powder, Sodium Caseinate, Disodium Inosinate, and Disodium Guanylate.";
+	var text2 = "Made from: Sugar, Unbleached Enriched Wheat Flour [Flour, Niacin, Reduced Iron, Thiamin Mononitrate (Vitamin B1), Riboflavin (Vitamin B2), Folic Acid], Semi-Sweet Chocolate [Sugar, Chocolate Liquor, Cocoa Butter, Chocolate Liquor Processed with Alkali (Dutched), Milk Fat, Soy Lecithin Added as an Emulsifier, Vanilla Extract], Vegetable Oils (Palm and/or Interesterified and Hydrogenated Soybean and/or Hydrogenated Cottonseed), Oatmeal, Contains 2 Percent or Less of: Butter (Milk), Egg Whites, Salt, Leavening (Cream of Tartar, Baking Soda) and Natural Flavors."
+	var text3 = "Made from Roasted Peanut, Contains 2% or Less of: Fully Hydrogenated Vegetable Oil (Rapeseed and Soybean), Mono and Diglycerides, Molasses, Sugar, Salt."
+
+	var string = text1;
+	document.formData["button1"].onclick = function () {
+		string = text1;
+		console.log("1");
+		runCode(string);
+	}
+	document.formData["button2"].onclick = function () {
+		string = text2;
+		console.log("2");
+		runCode(string);
+	}
+	document.formData["button3"].onclick = function () {
+		string = text3;
+		console.log("3");
+		runCode(string);
+	}
+
+
+	runCode(string);
+});
+
+function runCode(string) {
+	document.getElementById('milk').style.backgroundColor = 'green';
+	document.getElementById('egg').style.backgroundColor = 'green';
+	document.getElementById('fish').style.backgroundColor = 'green';
+	document.getElementById('shellfish').style.backgroundColor = 'green';
+	document.getElementById('peanut').style.backgroundColor = 'green';
+	document.getElementById('wheat').style.backgroundColor = 'green';
+	document.getElementById('soybeans').style.backgroundColor = 'green';
+	document.getElementById('edible').style.backgroundColor = 'green';
+
+	var allergie = "";
+	var milk = false;
+	var egg = false;
+	var fish = false;
+	var shellfish = false;
+	var peanut = false;
+	var wheat = false;
+	var soybeans = false;
+	var edible = true;
+	var none = false;
+
+	allergie = "milk";
+	for (var i=0; i < string.length-allergie.length; i++) {
+	    if (allergie.toLowerCase() === string.substring(i, i+allergie.length).toLowerCase()) {
+	        console.log("milk Yes");
+	        console.log(string.substring(i, i+allergie.length));
+	        milk = true;
+	        i = string.length;
+	    }
+	}
+	allergie = "egg";
+	for (var i=0; i < string.length-allergie.length; i++) {
+	    if (allergie.toLowerCase() === string.substring(i, i+allergie.length).toLowerCase()) {
+	        console.log("egg Yes");
+	        console.log(string.substring(i, i+allergie.length));
+	        egg = true;
+	        i = string.length;
+	    }
+	}
+	allergie = "fish";
+	for (var i=0; i < string.length-allergie.length; i++) {
+	    if (allergie.toLowerCase() === string.substring(i, i+allergie.length).toLowerCase()) {
+	        console.log("fish Yes");
+	        console.log(string.substring(i, i+allergie.length));
+	        fish = true;
+	        i = string.length;
+	    }
+	}
+	allergie = "shellfish";
+	for (var i=0; i < string.length-allergie.length; i++) {
+	    if (allergie.toLowerCase() === string.substring(i, i+allergie.length).toLowerCase()) {
+	        console.log("shellfish Yes");
+	        console.log(string.substring(i, i+allergie.length));
+	        shellfish = true;
+	        i = string.length;
+	    }
+	}
+	allergie = "peanut";
+	for (var i=0; i < string.length-allergie.length; i++) {
+	    if (allergie.toLowerCase() === string.substring(i, i+allergie.length).toLowerCase()) {
+	        console.log("peanut Yes");
+	        console.log(string.substring(i, i+allergie.length));
+	        peanut = true;
+	        i = string.length;
+	    }
+	}
+	allergie = "wheat";
+	for (var i=0; i < string.length-allergie.length; i++) {
+	    if (allergie.toLowerCase() === string.substring(i, i+allergie.length).toLowerCase()) {
+	        console.log("wheat Yes");
+	        console.log(string.substring(i, i+allergie.length));
+	        wheat = true;
+	        i = string.length;
+	    }
+	}
+	allergie = "soybeans";
+	for (var i=0; i < string.length-allergie.length; i++) {
+	    if (allergie.toLowerCase() === string.substring(i, i+allergie.length).toLowerCase()) {
+	        console.log("soybeans Yes");
+	        console.log(string.substring(i, i+allergie.length));
+	        soybeans = true;
+	        i = string.length;
+	    }
+	}
+
+	inputAllergies = function() {
+    	var input = document.getElementById("userInput").value;
+    	//alert(input);
+    	edible = true;
+    	var regex = /[A-Za-z]+/g;
+    	var results = input.match(regex);
+    	console.log(results);
+    	$.each(results, function(index, value) {
+    		console.log(value);
+    		console.log("EVAL: "+ eval(value));
+    		if (eval(value)) { //If any value is true
+    			console.log(value + "!");
+    			edible = false;
+    		}
+    	});
+    	if(!edible) {
+			document.getElementById('edible').style.backgroundColor = 'red';
+		}else {
+			document.getElementById('edible').style.backgroundColor = 'green';
+		}
+	}
+	
+	inputAllergies();
+
+	/*if(milk || egg || fish || shellfish || peanut || wheat || soybeans) {
+	    edible = false;
+	}*/
+
+	if(milk) {
+		document.getElementById('milk').style.backgroundColor = 'red';
+	}
+	if(egg) {
+		document.getElementById('egg').style.backgroundColor = 'red';
+	}
+	if(fish) {
+		document.getElementById('fish').style.backgroundColor = 'red';
+	}
+	if(shellfish) {
+		document.getElementById('shellfish').style.backgroundColor = 'red';
+	}
+	if(peanut) {
+		document.getElementById('peanut').style.backgroundColor = 'red';
+	}
+	if(wheat) {
+		document.getElementById('wheat').style.backgroundColor = 'red';
+	}
+	if(soybeans) {
+		document.getElementById('soybeans').style.backgroundColor = 'red';
+	}
+	if(!edible) {
+		document.getElementById('edible').style.backgroundColor = 'red';
+	}
+}
+</script>
