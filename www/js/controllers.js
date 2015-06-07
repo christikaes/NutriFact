@@ -4,7 +4,9 @@ angular.module('starter.controllers', [])
   $scope.cameraCapture = function() {
     navigator.camera.getPicture(function(result) {
         // file uri
-        $scope.imageUri = result;
+        $scope.$apply(function() {
+          $scope.imageUri = result;
+        });
 
         var uploadUrl = "https://api.idolondemand.com/1/api/sync/ocrdocument/v1";
         var fd = new FormData();
