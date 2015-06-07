@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('NutriCtrl', function($scope) {
+.controller('NutriCtrl', function($scope, $http) {
   $scope.cameraCapture = function() {
     navigator.camera.getPicture(function(result) {
         // file uri
@@ -13,15 +13,16 @@ angular.module('starter.controllers', [])
         fd.append("apikey", "dd5e679c-3e9b-4ee6-ab4c-9db34501fb66");
         fd.append("mode", "document_scan");
         fd.append("file", result);
+
         $http.post(uploadUrl, fd, {
             transformRequest: angular.identity,
             headers: {'Content-Type': undefined}
         })
         .success(function(result){
-          alert(result);
+          alert(JSON.stringify(result));
         })
         .error(function(err){
-          alert(err)
+          alert(JSON.stringify(err));
         });
       }, function(err) {
         alert(err);
